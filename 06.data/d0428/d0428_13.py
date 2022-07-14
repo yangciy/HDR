@@ -1,0 +1,16 @@
+import pandas as pd
+
+df=pd.read_excel('연령별인구현황.xlsx',skiprows=3,usecols='B,E:Y')
+df.set_index('행정기관',inplace=True)
+df.rename(index={'전국  ':'전국'},inplace=True)
+print(df.index)
+# print(df)
+# print(df.columns)
+# print(df.info())print(df.iloc[0])
+# print(df['0~4세'])
+# df['0~4세']=df['0~4세'].str.replace(',','').astype(int)
+# print(df['0~4세'][1:].sum())
+# df[df.columns[1:]]=df[df.columns[1:]].str.replace(',','').astype(int)
+# print(df.index.values)
+# print(df.index)
+# print(df.loc[df.index[1]],df.index[1])
