@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/js0401_10.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<form action="js0401_02.html" method="get" name="frm">
+    <!-- 1900~2022년 1~12월 1~31 일 만들어  -->
+    <select name="year" id="year">
+    </select>
+    <label>년</label>
+    <select name="month" id="month">
+    </select>
+    <label>월</label>
+    <select name="day" id="day">
+    </select>
+    <label>일</label>
+    <br>
+    <input type="submit" value="전송">
+</form>
+    <script>
+        //자바스크립트 날짜함수
+        //day by day
+        let today= new Date();
+        let todayYear = today.getFullYear();      //2022
+        let todayMonth = today.getMonth()+1;   //0~11   1을 더해줘야함
+        let todayDate= today.getDate();         //1~31
+        let todayDay = today.getDay();          //요일    0-월     6-일
+
+        let str1=''
+        let str2=''
+        let str3=''
+        for(let i=1900;i<=2022;i++){
+            if(todayYear==i){
+                str1+='<option value='+i+' selected>'+i+'</option>'
+            }else{
+            str1+='<option value='+i+'>'+i+'</option>'}
+        }
+        for(let i=1;i<=12;i++){
+            if(todayMonth==i){
+                str2+='<option value='+i+' selected>'+i+'</option>'
+            }else{
+            str2+='<option value='+i+'>'+i+'</option>'
+        }}
+        for(let i=1;i<=31;i++){
+            if(todayDate==i){
+                str3+='<option value='+i+' selected>'+i+'</option>'
+            }else{
+            str3+='<option value='+i+'>'+i+'</option>'
+        }
+    }
+        
+        document.getElementById('year').innerHTML=str1
+        document.getElementById('month').innerHTML=str2
+        document.getElementById('day').innerHTML=str3
+    </script>
+</body>
+</html>
