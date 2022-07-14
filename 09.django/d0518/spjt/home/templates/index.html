@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>메인페이지</h2>
+    <ul>
+        <a href="http://127.0.0.1:8000/students/stuWrite"><li>학생등록</li></a>
+        <a href="{% url 'students:stuList' %}"><li>학생전체리스트</li></a> 
+        <a href="/member/memberList"><li>멤버전체리스트</li></a> 
+        <a href="/member/list"><li>멤버전체리스트2</li></a> 
+        <a href="/member/login"><li>로그인</li></a> 
+        <a href="#"><li>로그아웃</li></a> 
+        <a href="/admin"><li>관리자페이지</li></a>
+    </ul>
+    <img src="{% static 'images/abc.jpg' %} ">
+</body>
+</html>
