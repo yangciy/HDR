@@ -1,1 +1,0 @@
-from test.stu_def import *
