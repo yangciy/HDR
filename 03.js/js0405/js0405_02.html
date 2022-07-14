@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        //css적용방법, 2개이상 css적용방법, 자기자신 this event1개 2개이상 on css적용하려면 css명령어사용 css, 속성에 적용하려면 attr
+        $(function(){
+            $('li').click(function(){
+                $(this).css({'background':'yellow','border':'1px solid black'})
+            })
+        })
+    </script>
+    <style>
+        ul{list-style: none;}
+    </style>
+</head>
+<body>
+    <ul>
+        <li>다음페이지</li>
+        <li>구글페이지</li>
+        <li>네이버페이지</li>
+    </ul>
+</body>
+</html>

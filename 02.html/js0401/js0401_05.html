@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/js0401_11.js">
+        
+    </script>
+    <script>
+        let today;
+        let hh,mi,ss;
+        function currTime(){
+            today = new Date();
+            hh = today.getHours()
+            mi = today.getMinutes()
+            ss = today.getSeconds()
+            document.getElementById('result').innerText=hh+':'+mi+':'+ss
+        }
+        function startClock(){
+            //currTime()
+            //mi +=''   //string으로 변환
+            //alert('시간 mi 길이 :'+mi.length)
+            timecheck=setInterval(currTime,500)
+        }
+        function stopClock(){
+            clearInterval(timecheck)
+        }
+    </script>
+    <style>
+        h2,#result{width:500px; height: 140px; font-size: 100px;
+            font-weight: 600; margin: 0 auto; text-align: center;}
+        h2{margin:0 auto;}
+        button{width:180px; height:80px ; font-size: 30px;}
+        div{width: 380px; margin: 0 auto;}
+    </style>
+</head>
+<body>
+    <h2>현재 시각</h2>
+    <script></script>
+    <div id="result">00:00:00</div>
+    <div>
+        <button onclick="startClock()">시작</button>
+        <button onclick="stopClock()">중지</button>
+    </div>
+</body>
+</html>

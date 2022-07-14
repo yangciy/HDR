@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/notice_list.css">
+  <script>
+    $(function(){
+      $('#fbtn').click(function(){     
+        let name=['김','나','박','이','차','돌','박','이','감']
+        let title=['a','b','c','d','e','f','g','h','i']
+        
+        for(let i=$('#fno').val();i<10;i++){
+        str= "<tr>"
+        str= str + "<td>"+(i+1)+"</td>"
+        str= str + "<td>"+title[i-1]+"</td>"
+        str= str + "<td>"+$('#fdate').val()+"</td>"
+        str= str + "<td>"+name[i-1]+"</td>"
+        str= str + "<td>"+$('#fhit').val()+"</td>"
+        str= str + "<tr>"
+        $('#tbody').append(str)}
+        str= "<tr>"
+        str= str + "<td>"+$('#fno').val()+"</td>"
+        str= str + "<td>"+$('#ftitle').val()+"</td>"
+        str= str + "<td>"+$('#fdate').val()+"</td>"
+        str= str + "<td>"+$('#fuser').val()+"</td>"
+        str= str + "<td>"+$('#fhit').val()+"</td>"
+        str= str + "<tr>"
+        $('#tbody').prepend(str)
+          //prepend - 위쪽, append- 아래쪽, html 
+      })
+    })
+  </script>
+  <style>
+    #frm{margin-top: 100px; margin:0 auto; width: 500px;}
+    #frm input{border:1px solid black; margin: 5px;}
+    #fbtn{width: 150px;height: 30px; text-align: center;}
+  </style>
+</head>
+<body>
+<section>
+    <h1>NOTICE</h1>
+    <div class="wrapper">
+      <form action="/search" name="search" method="post">
+        <select name="category" id="category">
+          <option value="0">전체</option>
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+        </select>
+
+        <div class="title">
+          <input type="text" size="16">
+        </div>
+  
+        <button type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+
+    <table>
+      <colgroup>
+        <col width="15%">
+        <col width="40%">
+        <col width="15%">
+        <col width="15%">
+        <col width="15%">
+      </colgroup>
+      <!-- 제목부분 -->
+      <tr>
+        <td>No.</td>
+        <td>제목</td>
+        <td>작성일</td>
+        <td>작성자</td>
+        <td>조회수</td>
+      </tr>
+      <!-- 내용부분 -->
+      <tbody id="tbody">
+     
+    
+      </tbody>
+      
+    </table>
+    
+    <ul class="page-num">
+      <li class="first"></li>
+      <li class="prev"></li>
+      <li class="num"><div>1</div></li>
+      <li class="next"></li>
+      <li class="last"></li>
+    </ul>
+    
+  </section>
+  
+  <form action="#" method="get" name="frm" id="frm">
+    <label>번호</label>
+    <input type="text" name="fno" id="fno"><br>
+    <label>제목</label>
+    <input type="text" name="ftitle" id="ftitle"><br>
+    <label>작성일</label>
+    <input type="text" name="fdate" id="fdate"><br>
+    <label>작성자</label>
+    <input type="text" name="fuser" id="fuser"><br>
+    <label>조회수</label>
+    <input type="text" name="fhit" id="fhit"><br>
+    <input type="button" id="fbtn" value="쓰기">
+</body>
+</html>

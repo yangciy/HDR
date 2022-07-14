@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script>
+        let dataXml=""
+        $(function(){
+            $("#ajaxBtn").click(function(){
+                let searchWord=""
+                searchWord =$("input[name='search']").val()
+               // if(nowPage==0){
+               //     alert('페이지 번호가 없습니다. 번호를 입력해주세요.')
+               //     ("input[name='search']").focus()
+               //     return false;
+               // }
+                $.ajax({
+                    url:"http://api.visitkorea.or.kr/openapi/service/rest/PhotoGalleryService/galleryDetailList?serviceKey=%2Fc1jjn1y9L2MEa%2BrmLG5Nd9vmL%2BPZ%2BB5tyUpVqToW35EykH%2Fj%2BvkNe%2BQxYipjH9kWEdKswaGpXMj2vNlEkPkYw%3D%3D&pageNo=1&numOfRows=10&MobileOS=ETC&MobileApp=AppTest&title="+searchWord,
+                    data:{},
+                    dataType:"xml",
+                    success:function(data){
+                        let str=''
+                        dataXml= $(data).find("items")
+                        let len = dataXml.find("item").length
+                        if(len>0){
+                            for(let i=0; i<len; i++){
+                                let contentId,createdTime,photoGrapher,galTitle,img;
+
+                                contentId= dataXml.find("item").eq(i).find("galContentId").text()
+                                createdTime= dataXml.find("item").eq(i).find("galCreatedtime").text()
+                                photoGrapher= dataXml.find("item").eq(i).find("galPhotographer").text()
+                                galTitle= dataXml.find("item").eq(i).find("galTitle").text()
+                                img= dataXml.find("item").eq(i).find("galWebImageUrl").text()
+                                str += '<tr>'
+                                    str += '<td>'+contentId+'</td>'
+                                    str += '<td>'+createdTime+'</td>'
+                                    str += '<td>'+photoGrapher+'</td>'
+                                    str += '<td>'+galTitle+'</td>'
+                                    str += '<td><a href="'+img+'" target="blank"><img src='+img+'></td>'
+                                    str += '</tr>'
+                            }//for
+                            $("#tbody").html(str)
+                        }
+                    },
+                    error:function(){
+                        alert('실패')
+                    }
+                })
+            })
+        })
+    </script>
+    <style>
+        div{width:1100px; margin:0 auto; }
+        #ajaxBtn{width:200px; height:50px; margin:50px 0 30px 0;
+        cursor: pointer; }
+        table,th,td{border:1px solid black; border-collapse: collapse;
+        width:1100px; margin-top:50px; margin:0 auto; text-align: center;}
+        th,td{height:30px;}
+        #itemDate{text-align: right;}
+        img{width: 50px;}
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label>검색</label>
+        <input type="text"  name="search">
+        <button id="ajaxBtn" >정보 가져오기</button>
+    </div>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>날짜</th>
+            <th>사진작가</th>
+            <th>제목</th>
+            <th>이미지</th>
+
+        </tr>
+        <tbody id="tbody">
+            <tr>
+                <td>2553300</td>
+                <td>20180710164548</td>
+                <td>한국관광공사</td>
+                <td>한국관광공사 이범수</td>
+                <td>img</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    
+</body>
+</html>

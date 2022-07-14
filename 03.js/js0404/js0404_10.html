@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let sum=0
+        let a=1
+        $(function(){
+            $('#left').click(function(){
+                let num=Number(-1)
+                sum=(a+num)
+                $('#photo').parent().html('<img src="images/'+sum+'.jpeg">')
+    
+            })
+            $('#right').click(function(){
+                let num=Number(1)
+                sum=(a+num)
+
+                $('#photo').parent().html('<img src="images/'+sum+'.jpeg">')
+
+            })
+
+        })
+    </script>
+    <style>
+        *{margin: 0; padding: 0;}
+        #main{width: 500px; height: 400px; border:1px solid black;
+            overflow:hidden; margin: 0 auto; margin-top: 50px;
+        }
+        #viewNum,#sub{width: 150px; margin: 20px auto;} 
+        #viewNum{font-size: 30px;}
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img src="images/1.jpeg" id="photo">
+    </div>
+    <div id="sub">
+        <button  id="left">← 이전</button>
+        <button  id="right">다음 →</button>
+    </div>
+</body>
+</html>

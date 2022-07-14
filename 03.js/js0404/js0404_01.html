@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let w;
+        function event_popup(){
+            w=window.open('','','widht=300px,height=400px, left=300px,top=100px')
+        }
+        function sizeFirst(){
+
+            w.resizeto(150,150);
+            w.focus();
+        }
+        function sizePlus(){
+            alert('테스트')
+            w.resizeBy(10,10);
+            w.focus();
+        }
+    </script>
+</head>
+<body>
+    <button onclick="event_popup()">팝업창 오픈</button><br>
+    <br>
+    <button onclick="sizeFirst()">사이즈 초기화</button>
+    <button onclick="sizePLus()">창 사이즈 증가</button>
+</body>
+</html>
