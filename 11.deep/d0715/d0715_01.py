@@ -25,19 +25,21 @@ model.add(keras.layers.Dense(10,activation='softmax'))
 
 model.summary()
 model.compile(optimizer='adam',loss='sparse_categorical_crossentropy',metrics='accuracy')
-print('기본은 과연 cpu인가 gpu인가')
-history=model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
-model.save_weights('model_test.h5')
+with tf.device("/device:CPU:0"):
+    history=model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y),n_jobs=-1)
+# model.save_weights('model_test.h5')
+
+model.save('model_all.h5')
 # plt.plot(history.history['loss'])
 # plt.plot(history.history['val_loss']) 
 # plt.xlabel('epoch')
 # plt.ylabel('loss')
 # plt.legend(['train','test'])
 # # plt.show()
-print("CPU를 사용한 학습")
-with tf.device("/device:CPU:0"):
-    model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
+# print("CPU를 사용한 학습")
 
-print("GPU를 사용한 학습")s
-with tf.device("/device:GPU:0"):
-    model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
+#     model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
+
+# print("GPU를 사용한 학습")
+# with tf.device("/device:GPU:0"):
+#     model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
