@@ -35,7 +35,30 @@ test=pd.read_csv('test.csv')
 
 train=train.fillna(0)
 test=test.fillna(0)
+from sklearn.preprocessing import StandardScaler
 
+scaler = StandardScaler()
+
+# 학습용 데이터를 이용해 scaler를 학습시킵니다.
+scaler.fit(train[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+# 학습된 scaler를 사용해 데이터를 변환합니다.
+scaled = scaler.transform(train[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+# 변환된 값을 새로운 column에 할당합니다.
+train[['Scaled_Promotion1','Scaled_Promotion2',
+       'Scaled_Promotion3','Scaled_Promotion4',
+       'Scaled_Promotion5']] = scaled
+train = train.drop(columns=['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'])
+
+
+scaled = scaler.transform(test[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+test[['Scaled_Promotion1','Scaled_Promotion2',
+       'Scaled_Promotion3','Scaled_Promotion4',
+       'Scaled_Promotion5']] = scaled
+
+test = test.drop(columns=['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'])
 train['IsHoliday']=train['IsHoliday'].apply(Holi)
 train['Month']=train['Date'].apply(Month)
 train['Year']=train['Date'].apply(Year)

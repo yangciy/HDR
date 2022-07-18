@@ -35,7 +35,30 @@ test=pd.read_csv('test.csv')
 
 train=train.fillna(0)
 test=test.fillna(0)
+from sklearn.preprocessing import StandardScaler
 
+scaler = StandardScaler()
+
+# 학습용 데이터를 이용해 scaler를 학습시킵니다.
+scaler.fit(train[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+# 학습된 scaler를 사용해 데이터를 변환합니다.
+scaled = scaler.transform(train[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+# 변환된 값을 새로운 column에 할당합니다.
+train[['Scaled_Promotion1','Scaled_Promotion2',
+       'Scaled_Promotion3','Scaled_Promotion4',
+       'Scaled_Promotion5']] = scaled
+train = train.drop(columns=['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'])
+
+
+scaled = scaler.transform(test[['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5']])
+
+test[['Scaled_Promotion1','Scaled_Promotion2',
+       'Scaled_Promotion3','Scaled_Promotion4',
+       'Scaled_Promotion5']] = scaled
+
+test = test.drop(columns=['Promotion1','Promotion2','Promotion3','Promotion4','Promotion5'])
 train['IsHoliday']=train['IsHoliday'].apply(Holi)
 train['Month']=train['Date'].apply(Month)
 train['Year']=train['Date'].apply(Year)
@@ -72,21 +95,3 @@ submission = pd.DataFrame({
 })
 temp.to_csv('submit13.csv', index = False)
 
-
-# LGBMRegressor(bagging_fraction=0.8, bagging_freq=3, boosting_type='gbdt',
-#               class_weight=None, colsample_bytree=1.0, feature_fraction=0.8,
-#               importance_type='split', learning_rate=0.2, max_depth=-1,
-#               min_child_samples=6, min_child_weight=0.001, min_split_gain=0.6,
-#               n_estimators=100, n_jobs=-1, num_leaves=30, objective=None,
-#               random_state=42, reg_alpha=0.001, reg_lambda=5, silent=True,
-#               subsample=1.0, subsample_for_bin=200000, subsample_freq=0)
-# XGBRegressor(base_score=0.5, booster='gbtree', colsample_bylevel=1,
-#              colsample_bynode=1, colsample_bytree=0.7, enable_categorical=False,
-#              gamma=0, gpu_id=-1, importance_type=None,
-#              interaction_constraints='', learning_rate=0.3, max_delta_step=0,
-#              max_depth=8, min_child_weight=2, missing=nan,
-#              monotone_constraints='()', n_estimators=170, n_jobs=-1,
-#              num_parallel_tree=1, objective='reg:squarederror',
-#              predictor='auto', random_state=42, reg_alpha=10, reg_lambda=0.15,
-#              scale_pos_weight=33.0, subsample=0.9, tree_method='auto',
-#              validate_parameters=1, verbosity=0)
