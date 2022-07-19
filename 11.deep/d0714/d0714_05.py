@@ -38,6 +38,6 @@ print("CPU를 사용한 학습")
 with tf.device("/device:CPU:0"):
     model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
 
-print("GPU를 사용한 학습")s
+print("GPU를 사용한 학습")
 with tf.device("/device:GPU:0"):
     model.fit(train_s,train_y,epochs=5,validation_data=(test_s,test_y))
