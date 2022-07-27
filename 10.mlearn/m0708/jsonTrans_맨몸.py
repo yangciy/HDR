@@ -40,7 +40,7 @@ for folder in path:
                         RightPalm_x,RightPalm_y,Back_x,Back_y,Waist_x,Waist_y,LeftFoot_x,LeftFoot_y,RightFoot_x,RightFoot_y]
                     print(len(b))
                     aa.append(b)
-                    # print(a)
+                    print(b)
 
                 #   print(a)
                 #   print(b)
@@ -51,4 +51,4 @@ aaa=pd.DataFrame(aa,columns=['jpg_name','Nose_x','Nose_y','LeftEye_x','LeftEye_y
             'RightKnee_x','RightKnee_y','LeftAnkle_x','LeftAnkle_y','RightAnkle_x','RightAnkle_y','Neck_x','Neck_y','LeftPalm_x','LeftPalm_y',
             'RightPalm_x','RightPalm_y','Back_x','Back_y','Waist_x','Waist_y','LeftFoot_x','LeftFoot_y','RightFoot_x','RightFoot_y'])
 print(aaa.info())
-aaa.to_csv('Calisthenics.csv',index=False)
+aaa.to_csv('몸통.csv',index=False)
